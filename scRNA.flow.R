@@ -1,5 +1,5 @@
 ### This is a TOY script for scRNA seq analysis, which is NOT my original work. I curated approaches both of QC and downstream analysis from different online resources, which could be a good reference for my own potential project.
-### Oct 2023
+### 2023, keeping updating with my accumulated knowledge.
 
 library(Seurat)
 library(SoupX)
@@ -154,14 +154,25 @@ combined <- ScaleData(combined, vars.to.regress = c("S.Score", "G2M.Score"), fea
 ###########################################################
 # Exploration technical batch effects and correct for them
 ###########################################################
+### there could be a already known concrete technical batche we aim to adjust for; or we could adjust for a unknown collective batch effects from different resources 
+
 ### explore in UMAP or PCA, find the unwanted variation brought by technical BatchVariable1, BatchVariable2
 combined <- SCTransform(combined,vars.to.regress = c("BatchVariable1", "BatchVariable2"),verbose = FALSE)
+
+### for unknown techncial batches, we can use canonical correlation analysis (‘CCA’) / "RPCA" 
+### add example soon
 
 #------------------------------------------------------
 #------------------------------------------------------
 # DOWNSTREAM ANALYSIS BASED ON QUALITY CONTROLLED DATA
 #------------------------------------------------------
 #------------------------------------------------------
+##############
+# Clustering
+##############
+### FindClusters, based graph-based clustering algorithms (Louvain, Leiden ect). Tuning parameters of such as neighborhood in the previous step can influnce clustering results.
+### add examples soon
+
 #####################
 # Pseudobulk RNA seq 
 #####################
